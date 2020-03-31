@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- !DOCTYPE: xml 문서 작성 규칙을 지정한 파일을 지정
+config.xml : 기본 설정 파일  
+mapper :실제 sql Query 문장을 입력(쿼리파일)-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd"><!-- PUBLIC: dtd문서가 공증(국제적으로 인정)을 받으면 public -->
+<configuration>
+	<properties resource="model/mapper/mybatis.properties" /> <!-- 파일 형태로 접근 만드는건 package지만 파일로 생성되 파일 경로로 찾음 -->
+	<!-- mybatis.properties 설정 부분  -->
+	<!-- 사용할 Bean 클래스을 저장한 파일을 내가 사용할 명으로 Alias 설정 -->
+	<typeAliases>
+	   <typeAlias type="model.Member" alias="Member" />    
+	   <typeAlias type="model.Board" alias="Board"/>
+	</typeAliases>    
+	<!-- db connection 설정 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${jdbc.driver}" /> <!-- properties 내에 존재하는 파일들 -->
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>   
+		</environment> 
+	</environments>
+	<!-- 사용할 sql구문을 저장한 xml,interface을 설정 -->
+	<mappers>
+      <package name="model.mapper" /> <!-- mybatis-config.xml 기능  --> 
+	</mappers>
+</configuration>
